@@ -1,0 +1,23 @@
+﻿<Window 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Criar Pastas - Novo Projeto" Height="450" Width="301" WindowStartupLocation="CenterScreen">
+
+
+    <Grid>
+
+        <StackPanel HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="295">
+            <Grid Height="20"/>
+            <Button Content="Selecionar Destino" Height="30" Margin="9,10,17,10" Click="selecionar_click"/>
+            <Grid Height="20"/>
+            <Label Content="Inserir Nome do Projeto" HorizontalAlignment="Center"/>
+            <TextBox x:Name="docname" Text="" Height="45" Margin="10,0,17,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="268" FontSize="18" FontWeight="Bold" />
+            <TextBox x:Name="pathname" Text="" IsReadOnly="True" TextWrapping="WrapWithOverflow" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="-69,60,-64,5" VerticalAlignment="Center" FontWeight="Bold" Width="428" Height="108" MaxWidth="270" MaxHeight="100" UseLayoutRounding="True" RenderTransformOrigin="0.659,0.509"/>
+
+            <Button Content="Gerar Pastas" Height="30" Margin="0,10,17,10" VerticalAlignment="Bottom" Click="criar_click" HorizontalAlignment="Right" Width="268"/>
+            <TextBox x:Name="success" Height="25" TextWrapping="Wrap" Text="" IsReadOnly="True" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="#FF3A9546"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
