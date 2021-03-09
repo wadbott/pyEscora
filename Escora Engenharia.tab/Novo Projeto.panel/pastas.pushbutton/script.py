@@ -4,13 +4,16 @@ __author__ = 'Wadham Bottacin'
 
 import os
 from pyrevit import forms
+import datetime
 
+x = datetime.datetime.now()
 doc = __revit__.ActiveUIDocument.Document.Title
 
 class DirCreatorForm(forms.WPFWindow):
 	def __init__(self, xaml_file_name):
 		forms.WPFWindow.__init__(self, xaml_file_name)
-		self.docname.Text = str("XXX_" + doc)
+		self.docname.Text = str("XXX_" + doc )
+		
 		
 
 	def selecionar_click(self,sender,e):
@@ -24,7 +27,8 @@ class DirCreatorForm(forms.WPFWindow):
 
 	def criar_click(self, sender, e):
 		#print(self.docname.Text)
-		LEGENDA = """
+
+		LEGENDA = """		
 		Legenda:\n
 
 		00-TOPO	Topografia/solos\n
@@ -56,6 +60,33 @@ class DirCreatorForm(forms.WPFWindow):
 		008-00_ARQ_EXEC_2021-02_R00.rvt\n
 		
 		"""
+		NOMES = []
+		NOMES.append("Nomenclatura dos arquivos desse projeto\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "TOPO" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "TOPO" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "FDC" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "FDC" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "EST" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "EST" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "ARQ" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "ARQ" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "ISP" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "ISP" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "IHP" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "IHP" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "IEP" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "IEP" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "ITP" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "ITP" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "GLP" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "GLP" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "ICI" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "ICI" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00\n")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "SPDA" + "_EXEC_" + x.strftime("%Y-%m") + "_R00")
+		NOMES.append(self.docname.Text[0:3] + "-00_" + "SPDA" + "_ESTUDO_" + x.strftime("%Y-%m") + "_R00")
+
+		
+
 		SUBS = ['01_'+ self.docname.Text[0:3] + '_DOC',
 				'02_'+ self.docname.Text[0:3] + '_MDL',
 				'03_'+ self.docname.Text[0:3] + '_MKT',
@@ -124,6 +155,12 @@ class DirCreatorForm(forms.WPFWindow):
 				with open (os.path.join(proj_path,'legenda.txt'), 'w') as l:
 					l.write(LEGENDA)
 					l.close()
+
+				with open (os.path.join(proj_path,'nomes.txt'), 'a') as n:
+					for nome in NOMES:
+						n.write(nome+'\n')
+
+					n.close()
 
 				for SUB in SUBS:					
 					os.mkdir(os.path.join(proj_path,SUB))
